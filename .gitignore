@@ -1,0 +1,26 @@
+# Ignore Terraform state files
+example/cluster/terraform.tfstate
+example/cluster/terraform.tfstate.*
+.terraform.lock.hcl
+
+# Ignore Terraform variable files containing secrets
+example/cluster/terraform.tfvars
+
+# Ignore Terraform working directories
+example/cluster/.terraform/
+
+# Ignore Terraform plan files
+*.tfplan
+
+# Ignore logs and debug files
+*.log
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo

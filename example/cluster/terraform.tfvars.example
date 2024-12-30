@@ -1,0 +1,42 @@
+twc_token       = ""
+cluster_name    = "prd-cluster"
+location        = "ru-1"
+disk_type       = "nvme"
+os_name         = "ubuntu"
+os_version      = "22.04"
+master_count    = 3
+master_cpu      = 1
+master_ram      = 1024
+master_disk     = 15360
+client_count    = 2
+client_cpu      = 1
+client_ram      = 1024
+client_disk     = 15360
+
+cloud_init_master = <<EOT
+#cloud-config
+hostname: master
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - docker.io
+
+runcmd:
+  - echo "Master node initialized" > /var/log/init.log
+EOT
+
+cloud_init_client = <<EOT
+#cloud-config
+hostname: client
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - docker.io
+
+runcmd:
+  - echo "Client node initialized" > /var/log/init.log
+EOT
