@@ -1,10 +1,35 @@
-> В моем понимание нет смысла вообще делать акцент на тераформе. Это всего лишь DSL. Берем CDKTF и строим логику на любом ЯП. Позже будет частью рут ИИ-агента.
+# app-poly-gitops-terraform
 
-Это не больше чем один из "модулей" эко-системы проекта для создания инфраструктуры по кластер кубик/номад
+Terraform модули для Timeweb Cloud. Часть экосистемы app-poly-gitops.
 
-"Модуль" = гит-репа под каждую сущность системы
+## Модули
 
-Первичной целью было получить модуль для терраформа и дальше его улучшать  
+### `modules/cluster`
+Создание bare-metal серверов (VPS) для self-hosted кластера.
 
-# Version
-v0.1 aplha - создает необходимое кол-во мастеров и клиентов под кластер
+### `modules/timeweb-k8s`
+Создание managed Kubernetes кластера в Timeweb Cloud.
+
+```hcl
+module "k8s" {
+  source = "git::https://github.com/justgithubaccount/app-poly-gitops-terraform.git//modules/timeweb-k8s"
+
+  cluster_name = "my-cluster"
+  project_id   = 1115913
+  network_id   = "network-xxx"
+  node_count   = 3
+}
+
+output "kubeconfig" {
+  value     = module.k8s.kubeconfig
+  sensitive = true
+}
+```
+
+## Связанные репозитории
+
+- `app-poly-gitops-infra` — использует эти модули
+- `app-poly-gitops-k8s` — GitOps манифесты
+- `app-poly-gitops-helm` — Helm chart
+- `app-poly-gitops-fastapi` — FastAPI сервис
+- `app-poly-gitops-crewai` — CrewAI мониторинг
