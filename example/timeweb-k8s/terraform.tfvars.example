@@ -1,0 +1,10 @@
+twc_token         = ""
+cluster_name      = "my-k8s-cluster"
+project_id        = 12345
+network_id        = "network-id"
+cluster_preset_id = 1675
+node_preset_id    = 1683
+node_count        = 3
+k8s_version       = "v1.34.2+k0s.0"
+network_driver    = "calico"
+autoscaling       = false
