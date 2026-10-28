@@ -14,3 +14,8 @@ fi
 
 grep -A5 'variable "project_id"' "${repo_root}/modules/timeweb-k8s/variables.tf" | grep -Eq 'default[[:space:]]*=[[:space:]]*null'
 grep -A5 'variable "network_id"' "${repo_root}/modules/timeweb-k8s/variables.tf" | grep -Eq 'default[[:space:]]*=[[:space:]]*null'
+
+workflow="${repo_root}/.github/workflows/validate.yaml"
+test -f "${workflow}"
+grep -q 'bash tests/test_timeweb_module.sh' "${workflow}"
+grep -q 'terraform -chdir=modules/timeweb-k8s validate' "${workflow}"
