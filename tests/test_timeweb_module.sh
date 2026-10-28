@@ -11,3 +11,6 @@ if grep -R -q --include='*.tf' 'tf\.timeweb\.cloud/timeweb-cloud/timeweb-cloud' 
   echo "legacy Timeweb provider source is still present" >&2
   exit 1
 fi
+
+grep -A5 'variable "project_id"' "${repo_root}/modules/timeweb-k8s/variables.tf" | grep -Eq 'default[[:space:]]*=[[:space:]]*null'
+grep -A5 'variable "network_id"' "${repo_root}/modules/timeweb-k8s/variables.tf" | grep -Eq 'default[[:space:]]*=[[:space:]]*null'

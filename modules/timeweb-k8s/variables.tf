@@ -4,13 +4,15 @@ variable "cluster_name" {
 }
 
 variable "project_id" {
-  description = "Timeweb project ID"
+  description = "Optional Timeweb project ID; null uses the account default"
   type        = number
+  default     = null
 }
 
 variable "network_id" {
-  description = "Timeweb network ID"
+  description = "Optional Timeweb VPC ID"
   type        = string
+  default     = null
 }
 
 variable "cluster_preset_id" {
