@@ -1,0 +1,35 @@
+name: Validate Terraform modules
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.13.5"
+
+      - name: Contract test
+        run: bash tests/test_timeweb_module.sh
+
+      - name: Format
+        run: terraform fmt -check -recursive
+
+      - name: Validate managed Kubernetes module
+        run: |
+          terraform -chdir=modules/timeweb-k8s init -backend=false
+          terraform -chdir=modules/timeweb-k8s validate
+
+      - name: Validate server cluster module
+        run: |
+          terraform -chdir=modules/cluster init -backend=false
+          terraform -chdir=modules/cluster validate

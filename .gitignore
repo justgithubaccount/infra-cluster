@@ -7,7 +7,7 @@ example/cluster/terraform.tfstate.*
 example/cluster/terraform.tfvars
 
 # Ignore Terraform working directories
-example/cluster/.terraform/
+**/.terraform/*
 
 # Ignore Terraform plan files
 *.tfplan
