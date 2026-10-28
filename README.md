@@ -1,4 +1,4 @@
-# app-poly-gitops-terraform
+# infra-cluster
 
 Terraform модули для Timeweb Cloud. Часть экосистемы app-poly-gitops.
 
@@ -12,7 +12,7 @@ Terraform модули для Timeweb Cloud. Часть экосистемы app
 
 ```hcl
 module "k8s" {
-  source = "git::https://github.com/justgithubaccount/app-poly-gitops-terraform.git//modules/timeweb-k8s"
+  source = "git::https://github.com/justgithubaccount/infra-cluster.git//modules/timeweb-k8s"
 
   cluster_name = "my-cluster"
   project_id   = 1115913

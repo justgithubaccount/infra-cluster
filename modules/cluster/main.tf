@@ -1,7 +1,8 @@
 terraform {
   required_providers {
     twc = {
-      source = "tf.timeweb.cloud/timeweb-cloud/timeweb-cloud"
+      source  = "timeweb-cloud/timeweb-cloud"
+      version = "~> 1.8"
     }
   }
 }
@@ -26,14 +27,14 @@ data "twc_os" "os" {
 resource "twc_server" "masters" {
   count = var.master_count
 
-  name = "${var.cluster_name}-master-${count.index}"
+  name  = "${var.cluster_name}-master-${count.index}"
   os_id = data.twc_os.os.id
 
   configuration {
     configurator_id = data.twc_configurator.configurator.id
-    cpu  = var.master_cpu
-    ram  = var.master_ram
-    disk = var.master_disk
+    cpu             = var.master_cpu
+    ram             = var.master_ram
+    disk            = var.master_disk
   }
 
   cloud_init = var.cloud_init_master
@@ -43,14 +44,14 @@ resource "twc_server" "masters" {
 resource "twc_server" "clients" {
   count = var.client_count
 
-  name = "${var.cluster_name}-client-${count.index}"
+  name  = "${var.cluster_name}-client-${count.index}"
   os_id = data.twc_os.os.id
 
   configuration {
     configurator_id = data.twc_configurator.configurator.id
-    cpu  = var.client_cpu
-    ram  = var.client_ram
-    disk = var.client_disk
+    cpu             = var.client_cpu
+    ram             = var.client_ram
+    disk            = var.client_disk
   }
 
   cloud_init = var.cloud_init_client
