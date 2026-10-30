@@ -11,19 +11,16 @@ provider "twc" {
   token = var.twc_token
 }
 
-# Динамическое получение configurator_id
 data "twc_configurator" "configurator" {
   location  = var.location
   disk_type = var.disk_type
 }
 
-# Динамическое получение os_id
 data "twc_os" "os" {
   name    = var.os_name
   version = var.os_version
 }
 
-# Создание мастер-нод
 resource "twc_server" "masters" {
   count = var.master_count
 
@@ -40,7 +37,6 @@ resource "twc_server" "masters" {
   cloud_init = var.cloud_init_master
 }
 
-# Создание клиент-нод
 resource "twc_server" "clients" {
   count = var.client_count
 
